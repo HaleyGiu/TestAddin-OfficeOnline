@@ -310,7 +310,7 @@
 				<bt:String id="BtnConnectService.Label" DefaultValue="Connect service"/>
 				<bt:String id="BtnDisConnectService.Label" DefaultValue="Disconnect service"/>
 				<bt:String id="BtnInsertData.Label" DefaultValue="Insert data"/>
-				<bt:String id="btnInsertApiResponseData.Label" DefaultValue="Insert Menud Env data"/>
+				<bt:String id="BtnInsertApiResponseData.Label" DefaultValue="Insert Menud Env data"/>
 				<bt:String id='AuthGroup.Label' DefaultValue='Authentication'/>
 				<bt:String id="CommandsGroup.Label" DefaultValue="Haley Add-in"/>
 				<bt:String id='StartupGroup.Label' DefaultValue='Comportamiento de Inicio'/>
@@ -330,7 +330,7 @@
 				<bt:String id="BtnConnectService.Tooltip" DefaultValue="Connect to backend data service"/>
 				<bt:String id="BtnDisConnectService.Tooltip" DefaultValue="Disconnect from backend data service"/>
 				<bt:String id="BtnInsertData.Tooltip" DefaultValue="Insert data from backend data service"/>
-				<bt:String id="btnInsertApiResponseData.Tooltip" DefaultValue="Insert data from backend data service"/>
+				<bt:String id="BtnInsertApiResponseData.Tooltip" DefaultValue="Insert data from backend data service"/>
 				<bt:String id="BtnOpenTaskpane.Tooltip" DefaultValue="Open the task pane"/>
 				<bt:String id="BtnCloseTaskpane.Tooltip" DefaultValue="Close the task pane"/>
 				<bt:String id="BtnSyncData.Tooltip" DefaultValue="Sync changes to source data"/>
