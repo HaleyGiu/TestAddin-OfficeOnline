@@ -32,7 +32,7 @@ async function insertFilteredData() {
 }
 
 async function callApi() {
-  const apiUrl = "http://localhost/OOS.WebApi/api/Engine/Test";
+  const apiUrl = "http://localhost/OOS.WebAPIExcel/api/Engine/Test";
 
   try {
     const response = await fetch(apiUrl, {
@@ -53,3 +53,4 @@ async function callApi() {
     apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
   }
 }
+

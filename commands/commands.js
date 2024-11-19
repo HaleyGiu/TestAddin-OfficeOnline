@@ -65,6 +65,13 @@ function btnDisconnectService(event) {
   event.completed();
 }
 
+  function btnInsertApiResponseData(event) {
+    console.log("Insert data button pressed");
+    // Mock code that pretends to insert data from a data source
+    insertDataResponse();
+    event.completed();
+  }
+
  async function btnSumData(event) {
   console.log("Insert data button pressed");
   // Mock code that pretends to insert data from a data source
@@ -128,6 +135,55 @@ async function insertData() {
     console.log(error);
   }
 }
+
+async function insertDataResponse() {
+  try {
+    await Excel.run(async (context) => {
+      let sheet = context.workbook.worksheets.getActiveWorksheet();
+      let responseTable = sheet.tables.add("A1:D1", true /*hasHeaders*/);
+      responseTable.name = "ResponseTable";
+
+      //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
+
+      const data = callApiMenuEnvironment();
+      responseTable.rows.add(null, data);
+
+      if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
+        sheet.getUsedRange().format.autofitColumns();
+        sheet.getUsedRange().format.autofitRows();
+      }
+      context.sync().then(() => {
+        monitorSheetChanges();
+        return context.sync();
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function callApiMenuEnvironment() {
+  const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return JSON.stringify(data);
+  } catch (error) {
+    apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
+  }
+}
+
 
 const g = getGlobal();
   

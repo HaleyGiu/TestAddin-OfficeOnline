@@ -144,6 +144,25 @@
 									</Action>
 									<Enabled>false</Enabled>
 								</Control>
+								<Control xsi:type="Button" id="BtnInsertApiResponseData">
+									<Label resid="BtnInsertApiResponseData.Label" />
+									<Supertip>
+										<!-- ToolTip title. resid must point to a ShortString resource. -->
+										<Title resid="BtnInsertApiResponseData.Label" />
+										<!-- ToolTip description. resid must point to a LongString resource. -->
+										<Description resid="BtnInsertApiResponseData.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="Icon.16x16"/>
+										<bt:Image size="32" resid="Icon.32x32"/>
+										<bt:Image size="80" resid="Icon.80x80"/>
+									</Icon>
+									<!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>btnInsertApiResponseData</FunctionName>
+									</Action>
+									<Enabled>true</Enabled>
+								</Control>
 								<Control xsi:type="Button" id="BtnSumData">
 									<Label resid="BtnSumData.Label" />
 									<Supertip>
@@ -291,6 +310,7 @@
 				<bt:String id="BtnConnectService.Label" DefaultValue="Connect service"/>
 				<bt:String id="BtnDisConnectService.Label" DefaultValue="Disconnect service"/>
 				<bt:String id="BtnInsertData.Label" DefaultValue="Insert data"/>
+				<bt:String id="btnInsertApiResponseData.Label" DefaultValue="Insert Menud Env data"/>
 				<bt:String id='AuthGroup.Label' DefaultValue='Authentication'/>
 				<bt:String id="CommandsGroup.Label" DefaultValue="Haley Add-in"/>
 				<bt:String id='StartupGroup.Label' DefaultValue='Comportamiento de Inicio'/>
@@ -310,6 +330,7 @@
 				<bt:String id="BtnConnectService.Tooltip" DefaultValue="Connect to backend data service"/>
 				<bt:String id="BtnDisConnectService.Tooltip" DefaultValue="Disconnect from backend data service"/>
 				<bt:String id="BtnInsertData.Tooltip" DefaultValue="Insert data from backend data service"/>
+				<bt:String id="btnInsertApiResponseData.Tooltip" DefaultValue="Insert data from backend data service"/>
 				<bt:String id="BtnOpenTaskpane.Tooltip" DefaultValue="Open the task pane"/>
 				<bt:String id="BtnCloseTaskpane.Tooltip" DefaultValue="Close the task pane"/>
 				<bt:String id="BtnSyncData.Tooltip" DefaultValue="Sync changes to source data"/>
