@@ -22,6 +22,7 @@
 	<SupportUrl DefaultValue="https://www.contoso.com/help"/> 
 	<AppDomains>
 		<AppDomain>https://haleygiu.github.io</AppDomain>
+		<AppDomain>https://localhost</AppDomain>
 	</AppDomains>
 	<!--End Basic Settings. -->
 	<!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->

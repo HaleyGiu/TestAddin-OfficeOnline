@@ -11,9 +11,9 @@ Office.onReady((info) => {
     document.getElementById("connectService").onclick = connectService; // in office-apis-helpers.js
     document.getElementById("selectFilter").onclick = insertFilteredData;
     
-    callApi();
     updateRibbon();
     updateTaskPaneUI();
+    callApi();
   }
 });
 
@@ -32,7 +32,7 @@ async function insertFilteredData() {
 }
 
 async function callApi() {
-  const apiUrl = "http://localhost/OOS.WebAPIExcel/api/Engine/Test";
+  const apiUrl = "https://localhost/OOS.WebAPIExcel/api/Engine/Test";
 
   try {
     const response = await fetch(apiUrl, {
