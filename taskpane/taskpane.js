@@ -32,7 +32,7 @@ async function insertFilteredData() {
 }
 
 async function callApi() {
-  const apiUrl = "https://localhost/api/Engine/Test";
+  const apiUrl = "http://localhost/OOS.WebApi/api/Engine/Test";
 
   try {
     const response = await fetch(apiUrl, {
