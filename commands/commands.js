@@ -140,12 +140,12 @@ async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
-      let responseTable = sheet.tables.add("A1:D1", true /*hasHeaders*/);
+      let responseTable = sheet.tables.add("A1:D1", true);
       responseTable.name = "ResponseTable";
 
       //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
 
-      const data = callApiMenuEnvironment();
+      const data = callApiExecute();
       responseTable.rows.add(null, data);
 
       if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
@@ -162,7 +162,7 @@ async function insertDataResponse() {
   }
 }
 
-async function callApiMenuEnvironment() {
+async function callApiExecute() {
   const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
 
   try {
@@ -194,4 +194,5 @@ Office.actions.associate("btnCloseTaskpane", btnCloseTaskpane);
 Office.actions.associate("btnEnableAddinStart", btnEnableAddinStart);
 Office.actions.associate("btnDisableAddinStart", btnDisableAddinStart);
 Office.actions.associate("btnInsertData", btnInsertData);
+Office.actions.associate("btnInsertApiResponseData", btnInsertApiResponseData);
 Office.actions.associate("btnSumData", btnSumData);
