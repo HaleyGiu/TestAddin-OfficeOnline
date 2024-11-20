@@ -139,21 +139,21 @@ async function insertData() {
 async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
+      let sheet = context.workbook.worksheets.getActiveWorksheet();
       let responseTable = sheet.tables.add("A1:B1", true);
       responseTable.name = "ResponseTable";
 
       //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
 
-      const data = callApiExecute(responseTable);
+      const data = callApiExecute(responseTable, sheet);
     });
   } catch (error) {
     console.log(error);
   }
 }
 
-async function callApiExecute(responseTable) {
+async function callApiExecute(responseTable, sheet) {
   const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
-  let sheet = context.workbook.worksheets.getActiveWorksheet();
   try {
     const response = await fetch(apiUrl, {
       method: "GET", 
