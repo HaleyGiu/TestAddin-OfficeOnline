@@ -139,7 +139,6 @@ async function insertData() {
 async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
-      let sheet = context.workbook.worksheets.getActiveWorksheet();
       let responseTable = sheet.tables.add("A1:B1", true);
       responseTable.name = "ResponseTable";
 
@@ -154,7 +153,7 @@ async function insertDataResponse() {
 
 async function callApiExecute(responseTable) {
   const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
-
+  let sheet = context.workbook.worksheets.getActiveWorksheet();
   try {
     const response = await fetch(apiUrl, {
       method: "GET", 
