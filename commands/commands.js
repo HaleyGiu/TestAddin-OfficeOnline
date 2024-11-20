@@ -145,8 +145,8 @@ async function insertDataResponse() {
 
       //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
 
-      const data = callApiExecute();
-      responseTable.rows.add(null, data);
+      const data = callApiExecute(responseTable);
+
 
       if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
         sheet.getUsedRange().format.autofitColumns();
@@ -162,7 +162,7 @@ async function insertDataResponse() {
   }
 }
 
-async function callApiExecute() {
+async function callApiExecute(responseTable) {
   const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
 
   try {
@@ -178,6 +178,7 @@ async function callApiExecute() {
     }
 
     const data = await response.json();
+    responseTable.rows.add(null, data);
     return JSON.stringify(data);
   } catch (error) {
     apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
