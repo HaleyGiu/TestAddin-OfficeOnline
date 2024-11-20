@@ -140,22 +140,12 @@ async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
-      let responseTable = sheet.tables.add("A1:D1", true);
+      let responseTable = sheet.tables.add("A1:B1", true);
       responseTable.name = "ResponseTable";
 
       //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
 
       const data = callApiExecute(responseTable);
-
-
-      if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
-        sheet.getUsedRange().format.autofitColumns();
-        sheet.getUsedRange().format.autofitRows();
-      }
-      context.sync().then(() => {
-        monitorSheetChanges();
-        return context.sync();
-      });
     });
   } catch (error) {
     console.log(error);
@@ -180,7 +170,14 @@ async function callApiExecute(responseTable) {
     const data = await response.json();
     const result = data["ResultSets"][0]["Data"].map(obj => Object.values(obj));
     responseTable.rows.add(null, result);
-    return JSON.stringify(data);
+    if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
+      sheet.getUsedRange().format.autofitColumns();
+      sheet.getUsedRange().format.autofitRows();
+    }
+    context.sync().then(() => {
+      monitorSheetChanges();
+      return context.sync();
+    });
   } catch (error) {
     apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
   }
