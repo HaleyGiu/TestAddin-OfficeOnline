@@ -178,7 +178,7 @@ async function callApiExecute(responseTable) {
     }
 
     const data = await response.json();
-    responseTable.rows.add(null, data);
+    responseTable.rows.add(null, data["ResultSets"][0]["Data"]);
     return JSON.stringify(data);
   } catch (error) {
     apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
