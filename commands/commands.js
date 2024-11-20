@@ -140,48 +140,40 @@ async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
+      const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
       let responseTable = sheet.tables.add("A1:B1", true);
       responseTable.name = "ResponseTable";
 
-      //expensesTable.getHeaderRowRange().values = [["Date", "Merchant", "Category", "Amount"]];
+      const response = await fetch(apiUrl, {
+        method: "GET", 
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
 
-      const data = callApiExecute(responseTable, sheet);
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      const result = data["ResultSets"][0]["Data"].map(obj => Object.values(obj));
+      responseTable.rows.add(null, result);
+
+      if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
+        sheet.getUsedRange().format.autofitColumns();
+        sheet.getUsedRange().format.autofitRows();
+      }
+      context.sync().then(() => {
+        monitorSheetChanges();
+        return context.sync();
+      });
+
+      
     });
   } catch (error) {
     console.log(error);
   }
 }
-
-async function callApiExecute(responseTable, sheet) {
-  const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
-  try {
-    const response = await fetch(apiUrl, {
-      method: "GET", 
-      headers: {
-        "Content-Type": "application/json"
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    const result = data["ResultSets"][0]["Data"].map(obj => Object.values(obj));
-    responseTable.rows.add(null, result);
-    if (Office.context.requirements.isSetSupported("ExcelApi", "1.2")) {
-      sheet.getUsedRange().format.autofitColumns();
-      sheet.getUsedRange().format.autofitRows();
-    }
-    context.sync().then(() => {
-      monitorSheetChanges();
-      return context.sync();
-    });
-  } catch (error) {
-    apiSmokeTestResponseHTML.innerHTML = "No se ha podido conectar con el servicio.";
-  }
-}
-
 
 const g = getGlobal();
   
