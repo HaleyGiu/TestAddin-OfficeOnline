@@ -12,29 +12,6 @@ function btnConnectService(event) {
   event.completed();
 }
 
-function btnSandbox(event) {
-  console.log("Sandbox iniciado");
-  // ***************
-
-  const authContext = Office.context.auth;
-  authContext.getAccessTokenAsync(function(result) {
-      if (result.status === Office.AsyncResultStatus.Succeeded) {
-          const token = result.value;
-          console.log(token);
-          console.log(result);
-      } else {
-          console.log("Error obtaining token", result.error);
-      }
-  }); 
-
-  //***************
-  g.state.setConnected(true);
-  g.state.isConnectInProgress = true;
-  updateRibbon();
-  connectService();
-  monitorSheetChanges();
-  event.completed();
-}
 
 function btnDisconnectService(event) {
   console.log("Disconnect service button pressed");
