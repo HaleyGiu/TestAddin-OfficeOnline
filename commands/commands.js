@@ -181,7 +181,6 @@ async function insertDataResponse() {
 const g = getGlobal();
   
 Office.actions.associate("btnConnectService", btnConnectService);
-Office.actions.associate("btnSandbox", btnSandbox);
 Office.actions.associate("btnDisconnectService", btnDisconnectService);
 Office.actions.associate("btnOpenTaskpane", btnOpenTaskpane);
 Office.actions.associate("btnCloseTaskpane", btnCloseTaskpane);
