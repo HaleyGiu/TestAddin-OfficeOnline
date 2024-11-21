@@ -12,6 +12,30 @@ function btnConnectService(event) {
   event.completed();
 }
 
+function btnSandbox(event) {
+  console.log("Sandbox iniciado");
+  // ***************
+
+  const authContext = Office.context.auth;
+  authContext.getAccessTokenAsync(function(result) {
+      if (result.status === Office.AsyncResultStatus.Succeeded) {
+          const token = result.value;
+          console.log(token);
+          console.log(result);
+      } else {
+          console.log("Error obtaining token", result.error);
+      }
+  }); 
+
+  //***************
+  g.state.setConnected(true);
+  g.state.isConnectInProgress = true;
+  updateRibbon();
+  connectService();
+  monitorSheetChanges();
+  event.completed();
+}
+
 function btnDisconnectService(event) {
   console.log("Disconnect service button pressed");
   // Your code goes here
@@ -143,6 +167,8 @@ async function insertDataResponse() {
       const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
       let responseTable = sheet.tables.add("A1:B1", true);
       responseTable.name = "ResponseTable";
+      responseTable.getHeaderRowRange().values = [["ID", "Name"]];
+      responseTable.format
 
       const response = await fetch(apiUrl, {
         method: "GET", 
@@ -178,6 +204,7 @@ async function insertDataResponse() {
 const g = getGlobal();
   
 Office.actions.associate("btnConnectService", btnConnectService);
+Office.actions.associate("btnSandbox", btnSandbox);
 Office.actions.associate("btnDisconnectService", btnDisconnectService);
 Office.actions.associate("btnOpenTaskpane", btnOpenTaskpane);
 Office.actions.associate("btnCloseTaskpane", btnCloseTaskpane);
