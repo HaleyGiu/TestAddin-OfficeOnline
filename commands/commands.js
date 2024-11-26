@@ -141,10 +141,10 @@ async function insertDataResponse() {
   try {
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
-      const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=ClientList&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4173";
-      let responseTable = sheet.tables.add("A1:B1", true);
+      const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=rBDListPhoneNumbersGet&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4101";
+      let responseTable = sheet.tables.add("B6:R6", true);
       responseTable.name = "ResponseTable";
-      responseTable.getHeaderRowRange().values = [["ID", "Name"]];
+      responseTable.getHeaderRowRange().values = [["Staff	Nombre", "Oficina", "Categoría", "División", "Entidad Legal", "Departamento", "Dirección", "Despacho", "Ext 1", "Ext 2", "Teléfono", "Móvil", "Email", "GUID", "StaffCode", "Secretaria", "Nombre Secretaria"]];
       responseTable.format
 
       const response = await fetch(apiUrl, {
