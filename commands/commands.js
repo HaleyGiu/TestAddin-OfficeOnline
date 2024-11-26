@@ -143,7 +143,7 @@ async function insertDataResponse() {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
       const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=rBDListPhoneNumbersGet&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4101";
       let responseTable = sheet.tables.add("B6:R6", true);
-      responseTable.name = "ResponseTable";
+      responseTable.name = "Table1";
       responseTable.getHeaderRowRange().values = [["Staff	Nombre", "Oficina", "Categoría", "División", "Entidad Legal", "Departamento", "Dirección", "Despacho", "Ext 1", "Ext 2", "Teléfono", "Móvil", "Email", "GUID", "StaffCode", "Secretaria", "Nombre Secretaria"]];
       responseTable.format
 
