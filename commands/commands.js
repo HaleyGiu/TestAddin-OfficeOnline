@@ -142,10 +142,13 @@ async function insertDataResponse() {
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
       const apiUrl = "https://localhost/OOS.WebAPIExcel/api/DataQuery/Execute?QueryCode=rBDListPhoneNumbersGet&DatasourceCode&ChameleonStaffCode&Parameters&MenuID=4101";
-      let responseTable = sheet.tables.add("B6:R6", true);
-      responseTable.name = "Table1";
-      responseTable.getHeaderRowRange().values = [["Staff	Nombre", "Oficina", "Categoría", "División", "Entidad Legal", "Departamento", "Dirección", "Despacho", "Ext 1", "Ext 2", "Teléfono", "Móvil", "Email", "GUID", "StaffCode", "Secretaria", "Nombre Secretaria"]];
-      responseTable.format
+      // Ya disponemos de la tabla, no podemos intentar crearla porque se solapa
+      //let responseTable = sheet.tables.add("B6:R6", true);
+      //responseTable.name = "Table1";
+      //responseTable.getHeaderRowRange().values = [["Staff	Nombre", "Oficina", "Categoría", "División", "Entidad Legal", "Departamento", "Dirección", "Despacho", "Ext 1", "Ext 2", "Teléfono", "Móvil", "Email", "GUID", "StaffCode", "Secretaria", "Nombre Secretaria"]];
+
+      let responseTable = sheet.tables.getItem("Table1");
+
 
       const response = await fetch(apiUrl, {
         method: "GET", 
